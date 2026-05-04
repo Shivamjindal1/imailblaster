@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}My Downloads | imailblaster
+{% endblock title %}
+{% block aboutactive %} active{% endblock aboutactive %}
+{% block style %}
+.container{
+    display:flex;
+    flex-flow:wrap;
+    max-width:fit-content;  
+    justify-content: center;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+.card-body{
+    text-align:center;
+    padding: 0px;
+} 
+.card{
+    padding: 23px 12px;
+    margin: 23px 12px;
+    box-shadow: 0px 11px 30px 14px rgb(151 151 151 / 50%);
+}
+{% endblock style %}
+{% block body %}
+
+
+<h2 class="heading my-4">Downloads</h2>
+<div class="container my-3">
+
+  {% for purchase in purchases_dict %}
+  {% if notlogin %}
+  <p>Please signup first to see your downloads</p>
+      <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#signupModal">
+      SignUp
+      </button>
+    {% else %}
+    <div class="card mx-4" style="width: 18rem;">
+        <div class="card-body">
+            <h2 class="my-3">{{purchase.1}}</h2>
+            <div style="font-size:14px">License till {{purchase.2}}</div>
+            <a hidden class="btn btn-primary my-3" id='theanchor{{user}}{{purchase.0}}' download>Download</a>
+            <form action="/mydownloads/" method="post">{% csrf_token %}
+                <input type="hidden" name="user" value="{{user}}">
+                <input type="hidden" name="product" value="{{purchase.0}}">
+                <button class="btn btn-primary my-3" type="submit">Download</button>
+            </form>
+
+            <!-- form to clear standardbulkemail.zip --> 
+            <form hidden action="/clearmydownloads/" method="post" >{% csrf_token %}
+                <button hidden id="clearmydownloads" type="submit"></button>
+            </form>
+            <div style="text-align:initial;">
+                {% for plan in allplans %}
+            {% if plan.title == purchase.1 %}
+            <ul>
+                
+                {% for feature in plan.features_as_list %}
+                <li>
+                    {{ feature }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block js %}
+{% if download %}
+        <script>
+            try{
+                var downloadbtn = document.getElementById('theanchor{{username}}{{product}}')
+                downloadbtn.href = '../static/{{filename}}.zip'
+                downloadbtn.click()
+
+
+                // clear mydownloads (now no use of this because username and password login has been added to the program it self)
+                // clearmydownloads = document.getElementById('clearmydownloads')
+                // clearmydownloads.click()
+                // {% comment %} # add clear foldertozip user limit file after download is done from here by clicking to submit form  {% endcomment %}
+                               
+            }
+            catch{
+                alert('Some error occurred, Please try again later...')
+            }
+        </script>
+{% endif %}
+{% endblock js %} 

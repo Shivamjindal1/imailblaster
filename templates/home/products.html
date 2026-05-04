@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Blog
+{% endblock title %}
+{% block blogactive %} active{% endblock blogactive %} 
+{% block style %}
+img{
+  width:100%; 
+  height:100%;
+}
+#continueReading{
+  color:rgba(0, 128, 0, 0.644);
+  transition:color .15s;
+}
+#continueReading:hover{
+  color:rgb(0, 63, 0);
+}
+{% endblock style %}
+{% block body %}
+<div class="container my-2">
+<h1 class="my-2">Coding Articles By icoder</h1>
+{% for post in allPosts %}
+<div class="my-4 card mb-3" style="max-width: 100%;">
+    
+  <div class="row g-0">
+    <div class="col-md-4">
+      <a style="text-decoration:none;" class="text-dark" href="/blog/{{post.slug}}"><img  src="https://source.unsplash.com/368x152/?nature,water"  alt="..."></a>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+
+        <h5 class="card-title"><a style="text-decoration:none;" class="text-dark" href="/blog/{{post.slug}}">{{post.title}}</a></h5>
+        <p class="card-text"><div class="preview">{{post.content|truncatechars:250|safe}}</div></p>
+        <p class="card-text"><small class="text-muted">{{post.timeStamp}}</small></p>
+        <p class="card-text"><strong>Views : </strong><small class="text-muted">{{post.blog_views}}</small></p>
+        <a id="continueReading" href="/blog/{{post.slug}}">Continue Reading</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock body %}
+{% block js %}
+let previous = document.getElementsByClassName("preview")
+Array.from(previous).forEach((element)=>{
+  element.innerHTML = element.innerText
+})
+{% endblock js %}

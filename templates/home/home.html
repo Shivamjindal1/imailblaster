@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block title %}Bulk email software - Email Marketing | imailblaster
+{% endblock title %}
+
+
+{% block homeactive %} active{% endblock homeactive %}
+{% block style %}
+.firstcontainer{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+<!-- padding:0px 0px 0px 0px; -->
+flex-flow: row wrap;
+align-items: center;
+justify-content: space-between;
+}
+
+.mainheading{
+font-size:3.1rem;
+<!-- margin-top:revert; -->
+}
+.headingcenter{
+display:flex;
+justify-content:center;
+}
+
+{% endblock style %}
+{% block body %}
+{% load static %}
+
+<div class="container">
+  <div style="margin-top: 6vh;" class="firstcontainer my-3">
+    <div>
+      <h1 class="mainheading">
+        Grow your business with our Email Marketing software
+      </h1>
+      <p class="color-grey">Keep your bussiness growing by sending a perfect email to your audience at the right time with our Bulk Email Sending software.</p>
+      <!-- <button class="btn btn-primary" >Try for free</button> -->
+
+
+      {% if notlogin %}
+      <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#signupModal">
+        SignUp
+      </button>
+      {% else %}
+      <form action="/price/" method="post">{% csrf_token %}
+        <div>
+          <button type="submit" class="btn btn-success my-3">Download free software Now!</button>
+        </div>
+        {% endif %}
+ 
+    </div>
+    <div>
+      <img  style="height:42vh; width: 90%;" src="/../static/img/main.png" alt="Bulk email sending" title="Bulk email sending">
+    </div>
+  </div>
+
+  <div class="my-5">
+    <div class="headingcenter">
+      <h2  style="font-size:2.5rem">One to One Interaction</h2>
+    </div>
+    <div class="firstcontainer">
+      <div>
+        <p class="color-grey">In this concept, we are providing you a platform where you can keep an eye on what exactly is going on. Here
+          you will be able to see emails going to people by gmail what exactly automation is. This makes you sure that
+          the email is actually going to your audience which is a very cool thing.</p>
+      </div>
+      <div>
+      <img style="height:45vh; width:100%" src="/../static/img/automation2.png" alt="Real automation" title="Real automation">
+      </div>
+
+    </div>
+
+    <div class="headingcenter my-2">
+      <h2 style="font-size:2.5rem">Our Blasting Features</h2>
+    </div>
+    <div class="firstcontainer my-4">
+      <div>
+        <h2 style="font-size: 5vh;" class="my-2">Unlimited Emails Sending</h2>
+        <p class="color-grey">Sending emails in a limited amount per month makes it very difficult and forces us to thing every time before sending an email whether this email is too important or not. Here, we are providing unlimited emails to be sent to audience which will help grow your business and without any kind of extra charges.</p>
+      </div>
+      <div>
+      <img style="height:39vh; width:92%" src="/../static/img/unlimitedmails.png" alt="Unlimited Emails Sending" title="No limit on emails sending per month">
+      </div>
+    </div>
+    <div class="firstcontainer my-4">
+      <div>
+        <h2 style="font-size: 5vh;" class="my-2">How we are sending without spam?</h2>
+        <p class="color-grey">The biggest problem in sending emails is they are counted as spam. To come up over that, we have made a extra column of limit for how many emails to be sent by that specific email and it prevents emails to go in spam and reach the audience correctly.</p>
+      </div>
+      <div>
+      <img style="height:37vh; width:70%; margin:0px 15px 0px 15px;" src="/../static/img/spam2.png" alt="No email in spam" title="emails going in spam problem solved">
+      </div>
+    </div>
+    <div class="firstcontainer my-4">
+      <div>
+        <h2 style="font-size: 5vh;" class="my-2">Use HTML content directly</h2>
+        <p class="color-grey">Most of the message we creates are in HTML form and it becomes difficult to make that content again with using formatting tools. Therefore, here you can use HTML content directly to be sent as message.</p>
+      </div>
+      <div>
+      <img style="height: 31vh; width: 42%; margin: 0px 32px 0px 80px;" src="/../static/img/directhtml1.png" alt="Use direct HTML code for sending email" title="Use direct HTML code for sending email">
+      </div>
+    </div>
+    <div class="firstcontainer my-4">
+      <div>
+        <h2 style="font-size: 5vh;" class="my-2">Get proper guide</h2>
+        <p class="color-grey">Guidance is a very important thing in running a program, here we have made Screenshots and a guide tab in our product which give you a proper guidance of how to run the program smoothly and at any stage of problem, we are here to help you out.</p>
+      </div>
+      <div>
+      <img style="height: 31vh; width: 80%; margin: 0px 10px 0px 10px;" src="/../static/img/guide1.png" alt="Proper Guide" title="Proper guide will be given">
+      </div>
+    </div>
+
+
+    <div class="headingcenter my-3">
+      <h2>Why we only?</h2>
+    </div>
+    <div class="firstcontainer">
+      <div class="mx-3">
+        <p class="color-grey">We are providing the best service under best prices as compared to other ones</p>
+      </div>
+      <div class="mx-3">
+        <p class="color-grey">One to one interaction makes you sure that the email is actually going</p>
+      </div>
+      <div class="mx-3">
+        <p class="color-grey">No email in spam due to an extra limit functionality in program</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+{% endblock body %}

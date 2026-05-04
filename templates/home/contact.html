@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact | imailblaster
+{% endblock title %}
+{% block contactactive %} active{% endblock contactactive %}
+{% block style %}
+.flex{
+display:flex;
+flex-flow:wrap;
+max-width:fit-content;
+justify-content: center;
+}
+.card{
+  padding: 23px 12px;
+  margin: 23px 12px;
+  box-shadow: 0px 11px 30px 14px rgb(151 151 151 / 50%);
+}
+.contactcard-body{
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+  padding: 23px 12px;
+  margin: 23px 12px;
+  box-shadow: 0px 11px 30px 14px rgb(151 151 151 / 50%);
+} 
+.contactcard{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+{% endblock style %}
+
+{% block body %}
+
+<div class="container my-2">
+  <h1 class="mainheading text-center">How can we help?</h1>
+  <h3 class="my-4 text-center">Send us a message!</h3>
+
+
+
+  <div class="contactcard" >
+    <div class="contactcard-body">
+      <form method='post' action='/contact/'>{% csrf_token %}
+
+
+
+        <div class="form-group mx-sm-3 mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input name='name' type="text" class="form-control" id="" aria-describedby="name">
+        </div>
+        <div class="form-group mx-sm-3 mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input name='email' type="email" class="form-control" id="email" aria-describedby="email">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="form-group mx-sm-3 mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input name='phone' type="phone" class="form-control" id="phone">
+        </div>
+        <div class="form-group mx-sm-3 mb-3">
+          <label for="content" class="form-label">How may we help you?</label>
+          <textarea class="form-control" name="content" id="content" cols="100" rows="5"></textarea>
+        </div>
+        <div class="form-group mx-sm-3 mb-3">
+          {% comment %} <div class="g-recaptcha" style="transform:scale(0.77); transform-origin:0 0; width: 200px;" data-sitekey="6LcjbSwgAAAAAMK4weOCMhB4jBKrKCcx4ERqHXf0"></div> {% endcomment %}
+          <div class="g-recaptcha" style="transform:scale(0.77); transform-origin:0 0; width: 200px;" data-sitekey="6LdqQ_gqAAAAAEJhYEnTEVHojQpoIVBDbBWciR_e"></div>
+          
+        </div>
+        <button type="submit" class="form-group mx-sm-3 btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}

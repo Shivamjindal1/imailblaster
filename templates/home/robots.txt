@@ -1,0 +1,17 @@
+User-Agent: *
+
+Disallow: /static/
+Disallow: /wp-admin/
+Disallow: /home/views.py
+Disallow: /home/models.py
+Disallow: /home/urls.py
+Disallow: /home/admin.py
+Allow: /templates/home/home.html
+Allow: /templates/home/about.html
+Allow: /templates/home/contact.html
+Allow: /templates/home/price.html
+Allow: /templates/home/procontact.html
+Allow: /templates/home/screenshots.html
+
+Sitemap: http://127.0.0.1:8000/
+{% comment %} Sitemap: https://imailblaster.com/sitemap.xml {% endcomment %}

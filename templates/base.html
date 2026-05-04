@@ -1,0 +1,294 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content='width=device-width,initial-scale=1.0'>
+  <meta name='robots' content='index, follow'>
+  <link rel="canonical" href="https://imailblaster.com/" />
+  <meta name="description" content="Best Bulk Email Software for sending bulk emails and grow business easily. Download the free version now and start growing your business!">
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Best Email Marketing Software." />
+  <meta property="og:description" content="Send Bulk Emails on just one click. Very easy to use. Download the Free Version now and start your Growing Journey Now!" />
+  <meta property="og:image" content="https://imailblaster.com/static/img/ogimage.png" />
+  <meta property="og:url" content="https://imailblaster.com/" />
+  <meta property="og:site_name" content="imailblaster" />
+
+  <meta name="twitter:title" content="Best Email Marketing Software.">
+  <meta name="twitter:description" content="Send Bulk Emails on just one click. Very easy to use. Download the Free Version now and start your Growing Journey Now!">
+  <meta name="twitter:image" content="https://imailblaster.com/static/img/ogimage.png">
+  <meta name="twitter:site" content="@imailblaster">
+  <meta name="twitter:creator" content="@imailblaster">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/../static/img/downloadfavicon.png">
+ 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>{% block title %} {% endblock title %}</title>
+  <style> {% block style %}
+  {% endblock style %} </style>
+  <style>
+body{
+  font-family: font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";;
+}
+.mainheading{
+  font-size: 3.1rem;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: 0.125rem -15px 0px;
+    margin-right: -0.875rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.color-grey{
+  color:#6c757d!important;
+}
+.italiccc{
+  font-style: italic!important;
+}
+  </style>
+</head>
+<!-- {% load static %} -->
+<body style="background-color: #f8f9fa;">
+  {% load django_browser_reload %}
+
+
+
+  <nav style="position: sticky;top: 0;z-index:1;" class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"> <img width="200px" height="70" src="/../static/img/logo4.png" alt="imailblaster" title="imailblaster logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% block homeactive %} {% endblock homeactive %} " aria-current="page" href="/">Features</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link {% block priceactive %} {% endblock priceactive %}" href="/price/">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block screenshotsactive %} {% endblock screenshotsactive %}" href="/screenshots">Screenshots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block contactactive %} {% endblock contactactive %}" href="/contact">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block aboutactive %} {% endblock aboutactive %} " href="/about">About Us</a>
+          </li>
+
+
+          {% comment %} <!-- <li class="nav-item">
+            <a class="nav-link {% block contactactive %} {% endblock contactactive %} " href="/contact">Contact</a>
+          </li> --> {% endcomment %}
+
+        </ul>
+  <div class="mx-2" id="google_translate_element"></div>
+
+        {% comment %} <form class="d-flex mx-3" method="get" action="/search">
+          <input name="query" id="search" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> {% endcomment %}
+
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle my-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+            Welcome {{request.user}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <a class="dropdown-item" href="/logout/">Logout</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/mydownloads/">My Downloads</a>
+            </li>
+        
+          </ul>
+        </div>
+        {% else %}
+        <!-- Button to trigger login modal -->
+        <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#loginModal">
+          Login
+        </button>
+
+        <!-- Button to trigger SignUp modal -->
+        <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#signupModal">
+          SignUp
+        </button>
+        {% endif %}
+
+      </div>
+    </div>
+  </nav>
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+
+
+  <!-- SignUp Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalTitle">SignUp Now!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <form action="/signup/" method="post">{% csrf_token %}
+            <div class="mb-3 ">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique Username" required>
+            </div>
+            <div class="mb-3">
+              <label for="fname" class="form-label">First Name</label>
+
+              <input type="text" class="form-control" name="fname" id="fname" placeholder="eg. Christropher" required>
+
+            </div>
+            <div class="mb-3">
+              <label for="lname" class="form-label">Last Name</label>
+
+              <input type="text" class="form-control" name="lname" id="lname" placeholder="eg. sen" required>
+
+            </div>
+            <div class="mb-3">
+              <label for="usremail" class="form-label">Email Address</label>
+
+              <input type="email" class="form-control" id="usremail" name="usremail" placeholder="example@example.com" required>
+
+            </div>
+            <div class="mb-3">
+              <label for="Pass1" class="form-label">Password</label>
+
+              <input type="password" name="pass1" class="form-control" id="pass1" placeholder="Choose Your Password" required>
+
+            </div>
+            <div class="mb-3">
+              <label for="Pass2" class="form-label">Confirm Password</label>
+
+              <input type="password" name="pass2" class="form-control" id="pass2" placeholder="Confirm Your Password" required>
+
+            </div>
+            <div class="mb-3">
+              {% comment %} <div class="g-recaptcha" style="transform:scale(0.77); transform-origin:0 0; width: 200px;" data-sitekey="6LcjbSwgAAAAAMK4weOCMhB4jBKrKCcx4ERqHXf0"></div> {% endcomment %}
+              <div class="g-recaptcha" style="transform:scale(0.77); transform-origin:0 0; width: 200px;" data-sitekey="6LdqQ_gqAAAAAEJhYEnTEVHojQpoIVBDbBWciR_e"></div>
+            </div>
+            <button style="width: 27.3333%; margin-bottom: 5%; margin-left: 5%;" type="submit" class="btn btn-success">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalTitle">Login Now!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <form action="/login/" method="post">{% csrf_token %}
+            <div class="mb-3 ">
+              <label for="loginusername" class="form-label">Username or Email</label>
+              <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Your Username or Email" required>
+            </div>
+
+            <div class="mb-1">
+              <label for="loginpassword" class="form-label">Enter Your Password</label>
+              <input type="password" name="loginpassword" class="form-control" id="loginpassword" placeholder="Enter Your Password" required>
+            </div>
+            <div class="mb-3">
+              <a href="/forgot_password" class="link-primary">Forgot Password</a>
+            </div>
+            <button style="width: 27.3333%; margin-bottom: 5%; margin-left: 5%;" type="submit" class="btn btn-success">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Adding translate button -->
+{% comment %} <li class="nav-item">
+  <div id="google_translate_element"></div>  
+</li> {% endcomment %}
+
+  {% block body %} {% endblock body %}
+
+  <div class="align-bottom" style="background-color: rgb(241 241 241);">
+    <footer class="py-3">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="/price" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="/screenshots" class="nav-link px-2 text-muted">Screenshots</a></li>
+        <li class="nav-item"><a href="/contact" class="nav-link px-2 text-muted">Contact Us</a></li>
+        <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About Us</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Privacy Policy</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Terms & Conditions</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Returns, Refunds & Cancellation Policy</a></li>
+      </ul>
+      <p class="text-center text-muted">© 2022 imailblaster</p>
+    </footer>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- Popper.js first, then Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+    crossorigin="anonymous"></script>
+    {% django_browser_reload_script %}
+
+  </body>
+   {% block js %} {% endblock js %} 
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+  </script>
+  
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
+
+  </html>

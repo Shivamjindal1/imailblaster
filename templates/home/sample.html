@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous">
+
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      max-width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-minmax {
+
+      width: 240px;
+      display: flex;
+      font-family: arial, sans-serif;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+
+
+    .rs-range {
+      margin-top: 29px;
+      height: 10px;
+      outline: none !important;
+      border-radius: 5px;
+      background-color: #dee4ec;
+      width: 240px;
+      cursor: pointer;
+      -webkit-appearance: none;
+
+    }   
+  </style>
+</head>
+
+<body>
+
+
+
+  <!-- making the slider -->
+<!-- 
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h2 class="my-3">Free</h2>
+      <p class="card-text">Getting started with us</p>
+      <h2 class="my-3">₹0 /month</h2>
+   
+  <div class="container">
+    <div class="range-slider">
+      <input id="rs-range-line" oninput="update()" class="rs-range" type="range" value="0" min="20000" step=20000 max="100000">
+    </div>
+    <div class="box-minmax">
+      <span>20K</span>
+      <span>100K</span>
+    </div>
+    <div>
+      <span class="inputBox container" id="numberContacts" name="numberContats" >20,000 Emails</span>
+    </div>
+    
+    <div class="boxMinmax container">
+      <div id="pricings">
+        <span id="showPricing1">Estimated $20.00</span>
+      </div>
+    </div>
+  </div>
+   
+</div>
+</div>
+ -->
+
+<div >
+  <form method='post' action='/sample/'>{% csrf_token %}
+    <input type="file" id="myFile" name="filename">
+    <input type="submit">
+  </form>
+</div>
+
+</body>
+
+<!-- javascript for  slider -->
+<script>
+  let m1 = Math;
+  let slider1 = document.getElementById("rs-range-line");
+  let numberContacts = document.getElementById('numberContacts')
+  let showPricing1 = document.getElementById("showPricing1");
+
+
+
+
+  // taking current value after moving seekbar
+  function update() {
+
+  function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+    numberContacts.innerHTML = numberWithCommas(this.value) + ' Emails'
+    let ofContacts1 = this.value
+    let currentPricing1 = 0
+
+    // checking the vlaue of seekbar
+    if (ofContacts1 == 0) {
+      currentPricing1 = 0
+    }
+    else if (ofContacts1 < 0) {
+      showPricing1.innerHTML = 'Please choose a value between 1 to 30000'
+    }
+    else if (ofContacts1 <= 20000) {
+      currentPricing1 = 20
+    }
+    else if (ofContacts1 <= 40000) {
+      currentPricing1 = 20 + (0.00095 * (ofContacts1 - 20000))
+    }
+    else if (ofContacts1 <= 60000) {
+      currentPricing1 = 20 + (0.00095 * (40000 - 20000)) + (0.0007 * (ofContacts1 - 40000))
+    }
+    else if (ofContacts1 <= 80000) {
+      currentPricing1 = 20 + (0.00095 * (40000 - 20000)) + (0.0007 * (60000 - 40000)) + (0.0005 * (ofContacts1 - 60000))
+    }
+    else if (ofContacts1 <= 100000) {
+      currentPricing1 = 20 + (0.00095 * (40000 - 20000)) + (0.0007 * (60000 - 40000)) + (0.0005 * (80000 - 60000)) + (0.0003 * (ofContacts1 - 80000))
+    }
+    else if (ofContacts1 <= 200000) {
+      currentPricing1 = 20 + (0.00095 * (40000 - 20000)) + (0.0007 * (60000 - 40000)) + (0.0005 * (80000 - 60000)) + (0.0003 * (1000000 - 80000)) + (0.00025 * (ofContacts1 - 100000))
+    }
+
+    // displaying the value in the html template
+    let finalPricing1 = currentPricing1.toFixed(2);
+    showPricing1.innerHTML = 'Estimated ' + '$' + finalPricing1
+  }
+
+ 
+</script>
+
+
+</html>

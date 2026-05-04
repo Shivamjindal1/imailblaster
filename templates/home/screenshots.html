@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}Screenshots - Bulk Email Software | imailblaster
+{% endblock title %}
+{% block screenshotsactive %} active{% endblock screenshotsactive %}
+
+{% block style %}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+.flex{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+<!-- .widthheight{
+    
+} -->
+
+html,body {
+  text-align:center;
+}
+
+p {
+  margin: 1.5em 0;
+  color: #aaa;
+}
+
+
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: #bbb;
+}
+
+.italic { font-style: italic; }
+.small { font-size: 0.8em; }
+
+/** LIGHTBOX MARKUP **/
+
+.lightbox {
+  /* Default to hidden */
+  display: none;
+
+  /* Overlay entire screen */
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* A bit of padding around image */
+  padding: 1em;
+
+  /* Translucent background */
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Unhide the lightbox when it's the target */
+.lightbox:target {
+  display: block;
+}
+
+.lightbox span {
+  /* Full width and height */
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* Size and position background image */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+{% endblock style %}
+
+{% block body %}
+
+<h2 class="mainheading text-center">Screenshots</h2>
+
+<div class="flex container">
+    <div class="widthheight my-2 mx-2">
+        <a href="#img1">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/home.png">
+        </a>
+        <br>
+        <span class="color-grey italiccc">Home</span>
+        <br>
+    </div>
+    <div class="widthheight my-2 mx-2">
+        <a href="#img2">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/messagemaking.png">
+        </a>
+        <br>
+        <span class="color-grey italiccc">Message Making using HTML</span>
+        <br>
+    </div>
+    <div class="widthheight my-2 mx-2">
+        <a href="#img3">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/previewmessage.png">
+          </a>
+          <br>
+          <span class="color-grey italiccc">Preveiwing Message</span>
+          <br>
+    </div>
+    <div class="widthheight my-2 mx-2">
+        <a href="#img4">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/senthistory.png">
+          </a>
+          <br>
+          <span class="color-grey italiccc">Sent History</span>
+          <br>
+    </div>
+    <div class="widthheight my-2 mx-2">
+        <a href="#img5">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/validateemail.png">
+          </a>
+          <br>
+          <span class="color-grey italiccc">Validate Emails</span>
+          <br>
+    </div>
+    <div class="widthheight my-2 mx-2">
+        <a href="#img6">
+            <img style="height: 32vh; " width="270" height="144" src="/../static/img/screenshots/guide.png">
+          </a>
+          <br>
+          <span class="color-grey italiccc">Guide</span>
+          <br>
+    </div>
+
+</div>
+
+
+<!-- lightbox container hidden with CSS -->
+<a href="#" class="lightbox" id="img1">
+    <span style="background-image: url('/../static/img/screenshots/home.png')"></span>
+  </a>
+  <a href="#" class="lightbox" id="img2">
+    <span style="background-image: url('/../static/img/screenshots/messagemaking.png')"></span>
+  </a>
+  <a href="#" class="lightbox" id="img3">
+    <span style="background-image: url('/../static/img/screenshots/previewmessage.png')"></span>
+  </a>
+  <a href="#" class="lightbox" id="img4">
+    <span style="background-image: url('/../static/img/screenshots/senthistory.png')"></span>
+  </a>
+  <a href="#" class="lightbox" id="img5">
+    <span style="background-image: url('/../static/img/screenshots/validateemail.png')"></span>
+  </a>
+  <a href="#" class="lightbox" id="img6">
+    <span style="background-image: url('/../static/img/screenshots/guide.png')"></span>
+  </a>
+
+
+{% endblock %}

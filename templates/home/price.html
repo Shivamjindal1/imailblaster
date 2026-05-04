@@ -1,0 +1,411 @@
+{% extends 'base.html' %}
+
+{% block title %}Pricing For Bulk Email Software | imailbalster
+{% endblock title %}
+{% block priceactive %} active{% endblock priceactive %}
+{% block style %}
+.container{
+    display:flex;
+    flex-flow:wrap;
+    max-width:fit-content;  
+    justify-content: center;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+.card-body{
+    text-align:center;
+    padding: 0px;
+} 
+
+.box-minmax {
+
+  width: 227px;
+  display: flex;
+  font-family: arial, sans-serif;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.card{
+    padding: 23px 12px;
+    margin: 23px 12px;
+    box-shadow: 0px 11px 30px 14px rgb(151 151 151 / 50%);
+}
+
+
+.rs-range {
+  margin-top: 29px;
+  height: 10px;
+  outline: none !important;
+  border-radius: 5px;
+  background-color: #dee4ec;
+  width: 227px;
+  cursor: pointer;
+  -webkit-appearance: none;
+
+}   
+{% load humanize %}
+{% load static %}
+  {% endblock style %}
+{% block body %}
+{% load static %}
+<h1 class="heading my-4">Pricing plans</h1>
+
+<!-- Amount convert -->
+<div class="heading row" style="margin:0px;">
+
+
+  <div class="col-sm-6">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Currency</span>
+      </div>
+      <select style="z-index:0 ;" oninput="Updatevalue('Standard')" class="form-control to" id="sel2">
+        <option selected value="USD">US Dollar</option>
+        <option value="ARS">Argentinian Nuevo Peso</option>
+        <option value="AUD">Australian Dollar</option>
+        <option value="BRL">Brazilian real</option>
+        <option value="CAD">Canadian Dollar</option>
+        <option value="CHF">Swiss franc</option>
+        <option value="CLP">Chilean peso</option>
+        <option value="CNY">Chinese yuan renminbi</option>
+        <option value="COP">Colombian Peso</option>
+        <option value="DKK">Danish krone</option>
+        <option value="EGP">Egyptian Pound</option>
+        <option value="EUR">Euro</option>
+        <option value="GBP">British pound sterling</option>
+        <option value="HKD">Hong Kong dollar</option>
+        <option value="IDR">Indonesian rupiah</option>
+        <option value="ILS">Israeli new shekel</option>
+        <option value="INR">Indian rupee</option>
+        <option value="JPY">Japanese yen</option>
+        <option value="KRW">Korean won</option>
+        <option value="MXN">Mexican peso</option>
+        <option value="MYR">Malaysian ringgit</option>
+        <option value="NZD">New Zealand Dollar</option>
+        <option value="PEN">Peruvian sol</option>
+        <option value="PHP">Philippine peso</option>
+        <option value="PKR">Pakistani rupee</option>
+        <option value="RON">Romanian new leu</option>
+        <option value="RUB">Russian Ruble</option>
+        <option value="SAR">Saudi Riyal</option>
+        <option value="SGD">Singapore dollar</option>
+        <option value="THB">Thai baht</option>
+        <option value="TRY">Turkish lira</option>
+        <option value="ZAR">South African rand</option>
+      </select>
+    </div>
+  </div>
+
+  
+</div>
+
+
+<div class="container my-3">
+
+
+  {% for plan in allplans %}
+
+    <div class="card mx-4" style="width: 18rem;">
+        <div class="card-body">
+
+          {% if plan.title == 'Professional' %}
+          <h2 class="my-3">{{plan.title}}</h2>
+          <p class="card-text">Need Customisation according to you?</p>
+          
+          <a href="/procontact" class="btn btn-success my-3">Contact Us</a>
+          <input type="hidden" name="slug" value="{{ plan.slug }}">
+
+          {% endif %}
+          
+          {% if plan.title == 'Free' %}
+          <h2 class="my-3">{{plan.title}}</h2>
+          <p class="card-text">Starting at</p>
+          <h2 class="my-3"> <div class="boxMinmax container">
+            <div id="pricings">
+              <b><span>$0</span></b><small>/month</small>
+            </div>
+          </div>
+        </h2>
+        {% if notlogin %}
+        <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#signupModal">
+          SignUp
+        </button>
+        {% elif plan.slug in purchases_dict %}
+      <a class="btn btn-success my-3" href='/static/{{user}}{{plan.slug}}.zip' download>Download</a>
+        {% else %}
+        <form action="/checkout_standard/" method="post">{% csrf_token %}
+          <input type="hidden" name="slug" value="{{ plan.slug }}">
+          <input type="hidden" name="limit" value="{{ plan.maxrange }}">
+          <input type="hidden" name="title" value="{{ plan.title }}">
+          <div>
+            <button type="submit" class="btn btn-success my-3">Buy Now!</button>
+          </div>
+        </form>
+          {% endif %}
+        {% endif %}
+        
+        {% if plan.title != 'Free' and plan.title != 'Professional' %}
+        
+        <form action="/checkout_standard/" method="post">{% csrf_token %}
+          
+          <h2 class="my-3">{{plan.title}}</h2>
+
+          <input type="hidden" name="slug" value="{{ plan.slug }}">
+          <input type="hidden" name="title" value="{{ plan.title }}">
+            <p class="card-text">Starting at</p>
+            <h2 class="my-3"> <div class="boxMinmax container">
+              <div id="pricings">
+                <b><span name="span" id="showPricing{{plan.title}}">${{plan.rate_as_list.0}}.00</span></b>
+              </div>
+            </div>
+          </h2>
+          <div class="container input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">emails/month</label>
+            </div>
+            <select style="z-index:0 ;" oninput="Updatevalue('rms{{plan.title}}')" id="rs{{plan.title}}" name="limit" class="custom-select" id="inputGroupSelect01">
+              <option selected value="10000">10,000</option>
+              <option value="20000">20,000</option>
+              <option value="40000">40,000</option>
+              <option value="60000">60,000</option>
+              <option value="100000">100,000</option>
+              <option value="150000">150,000</option>
+              <option value="200000">200,000</option>
+            </select>
+          </div>
+          {% comment %} <div class="container">
+           <div class="range-slider">
+              <input name="limit" id="rs{{plan.title}}" oninput="Updatevalue('rms{{plan.title}}')" class="rs-range" type="range" value="0" min="{{plan.minrange}}" step=20000 max="{{plan.maxrange}}">
+            </div>
+            <div class="box-minmax">
+              <span>{{plan.minrange|intcomma}}</span>
+              <span>{{plan.maxrange|intcomma}}</span>
+            </div> 
+            <div>
+              <span class="inputBox container" id="numberContacts{{plan.title}}" name="numberContats" >Months</span>
+            </div>
+          </div> {% endcomment %}
+          {% if notlogin %}
+          <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#signupModal">
+            SignUp
+          </button>
+          {% else %}
+          <div>
+            <button type="submit" class="btn btn-success my-3">Buy Now!</button>
+          </div>
+          {% endif %}
+          
+        </form>
+          
+          {% endif %}
+          <div style="text-align:initial;">
+            <ul>
+              {% for feature in plan.features_as_list %}
+              <li>
+                {{ feature }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+    </div>
+    {% endfor %}    
+</div>
+{% endblock %}
+{% block js %}
+<script>
+
+const api = "https://api.exchangerate-api.com/v4/latest/USD";
+
+
+ {% for plan in allplans %}
+
+        
+          
+          {% if plan.title != 'Free' and plan.title != 'Professional' %}
+          function Updatevalue(rms{{plan.title}}) {
+            console.log('{{plan.title}}')
+            let m1 = Math;
+
+        
+              var slider1 = document.getElementById("rs{{plan.title}}");
+              var showPricing1 = document.getElementById("showPricing{{plan.title}}");
+          
+            
+              
+              let ofContacts1 = slider1.value
+            let currentPricing1 = 0
+            // checking the vlaue of seekbar
+            if (ofContacts1 == 10000) {
+              currentPricing1 = {{plan.rate_as_list.0}}
+            }
+            else if (ofContacts1 == 20000) {
+              currentPricing1 = {{plan.rate_as_list.1}}
+            }
+            else if (ofContacts1 == 40000) {
+              currentPricing1 = {{plan.rate_as_list.2}}
+            }
+            else if (ofContacts1 == 60000) {
+              currentPricing1 = {{plan.rate_as_list.3}}
+            }
+            else if (ofContacts1 == 100000) {
+              currentPricing1 = {{plan.rate_as_list.4}}
+            }
+            else if (ofContacts1 == 150000) {
+              currentPricing1 = {{plan.rate_as_list.5}}
+            }
+            else if (ofContacts1 == 200000) {
+              currentPricing1 = {{plan.rate_as_list.6}}
+            }
+            {% comment %} else if (ofContacts1 == 'Unlimited') {
+              currentPricing1 = {{plan.rate_as_list.4}}
+            } {% endcomment %}
+
+            
+            let finalPricing1 = currentPricing1.toFixed(1);
+            getResults()
+            function getResults() {
+              console.log('getresults')
+              fetch(`${api}`)
+                .then(currency => {
+                  return currency.json();
+                }).then(displayResults);
+            }
+
+            // display results after convertion
+            function displayResults(currency) {
+              resultFrom = 'USD'
+              resultTo = document.querySelector(".to").value;
+
+              if (resultTo=='USD') {
+                code='&#36;'
+              }
+              else if(resultTo=='EUR'){
+                  code='&#128;'
+              }
+              else if(resultTo=='EGP'){
+                  code= 'E'+'&#163;'
+              }
+              else if(resultTo=='ARS'){
+                  code='&#36;'
+              }
+              else if(resultTo=='NZD'){
+                  code='&#36;'
+              }
+              else if(resultTo=='CNY'){
+                  code='&#165;'
+              }
+              else if(resultTo=='MXN'){
+                  code='&#36;'
+              }
+              else if(resultTo=='RUB'){
+                  code='&#8381;'
+              }
+              else if(resultTo=='SAR'){
+                  code='SR'
+              }
+              else if(resultTo=='PHP'){
+                  code='&#8369;'
+              }
+              else if(resultTo=='PKR'){
+                  code='Rs'
+              }
+              else if(resultTo=='INR'){
+                  code='&#x20B9;'
+              }
+              else if(resultTo=='IDR'){
+                  code='Rp'
+              }
+              else if(resultTo=='KRW'){
+                  code='&#8361;'
+              }
+              else if(resultTo=='HKD'){
+                  code= 'HK'+'&#36;'
+              }
+              else if(resultTo=='GBP'){
+                  code='&#163;'
+              }
+              else if(resultTo=='BRL'){
+                  code= 'R'+'&#36;'
+              }
+              else if(resultTo=='DKK'){
+                  code= 'Kr.'
+              }
+              else if(resultTo=='CAD'){
+                  code= 'C'+'&#36;'
+              }
+              else if(resultTo=='SGD'){
+                  code= 'S'+'&#36;'
+              }
+              else if(resultTo=='THB'){
+                  code= '&#3647;'
+              }
+              else if(resultTo=='TRY'){
+                  code= '&#8378;'
+              }
+              else if(resultTo=='ZAR'){
+                  code= 'R'
+              }
+              else if(resultTo=='RON'){
+                  code= 'LEI'
+              }
+              else if(resultTo=='JPY'){
+                  code= '&#165;'
+              }
+              else if(resultTo=='MYR'){
+                  code= 'RM'
+              }
+              else if(resultTo=='CLP'){
+                  code= 'CLP'+'&#36;'
+              }
+              else if(resultTo=='COP'){
+                  code= 'COP'+'&#36;'
+              }
+              else if(resultTo=='PEN'){
+                  code= 'S/'
+              }
+              else if(resultTo=='MAD'){
+                  code= 'MAD'
+              }
+              else if(resultTo=='AUD'){
+                  code= 'AU'+'&#36;'
+              }
+              else if(resultTo=='CHF'){
+                  code= 'Fr.'
+              }
+              else{
+                code=resultTo
+              }
+
+              month = ofContacts1
+              price= parseInt(finalPricing1)
+              let fromRate = currency.rates[resultFrom];
+              let toRate = currency.rates[resultTo];
+              // search.style.display = "block";
+              showPricing1.innerHTML = code + ((toRate / fromRate) * price).toFixed(2); 
+            }
+            
+            // displaying the value in the html template
+          }
+          
+          
+          {% endif %}
+
+     
+    {% endfor %}   
+
+  
+  // taking current value after moving seekbar
+
+
+        
+  
+
+  
+  // taking current value after moving seekbar
+
+ 
+</script>
+{% endblock js %} 

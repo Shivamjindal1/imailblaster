@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Enter OTP | imailblaster
+{% endblock title %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Enter OTP</div>
+                    <div class="card-body">
+                        <form action="/enter_otp/" method="post">{% csrf_token %}
+                            <div class="form-group">
+                                <label for="otp">Enter OTP sended to your email</label>
+                                <input type="test" name="otp" class="form-control" id="otp" placeholder="One Time Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
